@@ -7,20 +7,10 @@ from planning.replanner import Replanner
 from planning.traffic import TrafficObject
 from simulation.simulator import Simulator
 
-
-# --------------------------------------------------
-# 1. CREATE ENVIRONMENT
-# --------------------------------------------------
-
 environment = Environment(
     width=24,
     height=16
 )
-
-
-# --------------------------------------------------
-# 2. CREATE OUR VEHICLE
-# --------------------------------------------------
 
 vehicle = Vehicle(
     x=2,
@@ -30,11 +20,6 @@ vehicle = Vehicle(
     destination_x=2,
     destination_y=2
 )
-
-
-# --------------------------------------------------
-# 3. START WITH TRAFFIC AWAY FROM OUR ROUTE
-# --------------------------------------------------
 
 traffic = TrafficObject(
     object_id="dynamic_vehicle",
@@ -46,17 +31,8 @@ traffic = TrafficObject(
 
 traffic_objects = [traffic]
 
-
-# --------------------------------------------------
-# 4. CREATE PLANNER + RISK ENGINE
-# --------------------------------------------------
-
 cost_function = TrafficCostFunction()
-
-planner = AStarPlanner(
-    environment,
-    cost_function
-)
+planner = AStarPlanner(environment, cost_function)
 
 risk_engine = RiskEngine(
     warning_distance=3.0,
@@ -68,11 +44,6 @@ replanner = Replanner(
     risk_engine
 )
 
-
-# --------------------------------------------------
-# 5. CREATE SIMULATOR
-# --------------------------------------------------
-
 simulator = Simulator(
     vehicle,
     environment,
@@ -81,17 +52,9 @@ simulator = Simulator(
     traffic_objects
 )
 
-
-# --------------------------------------------------
-# 6. RUN SIMULATION
-# --------------------------------------------------
-
 for i in range(12):
 
-    # After a few steps, introduce a dynamic obstacle
-    # near the vehicle's route.
     if i == 3:
-
         traffic.x = 2
         traffic.y = 10
         traffic.direction = "east"

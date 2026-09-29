@@ -100,10 +100,10 @@ SCENARIOS = {
         "traffic": [
             {
                 "id": "cattle",
-                "x": 8,
-                "y": 8,
+                "x": 0,
+                "y": 11,
                 "speed": 2,
-                "direction": "north"
+                "direction": "east"
             }
         ]
     }

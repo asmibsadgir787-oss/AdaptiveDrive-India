@@ -7,12 +7,7 @@ from planning.replanner import Replanner
 from planning.traffic import TrafficObject
 from simulation.simulator import Simulator
 
-
-environment = Environment(
-    width=24,
-    height=16
-)
-
+environment = Environment(width=24, height=16)
 
 vehicle = Vehicle(
     x=2,
@@ -23,7 +18,6 @@ vehicle = Vehicle(
     destination_y=2
 )
 
-
 crossing_vehicle = TrafficObject(
     object_id="crossing_vehicle",
     x=0,
@@ -32,31 +26,17 @@ crossing_vehicle = TrafficObject(
     direction="east"
 )
 
-
-traffic_objects = [
-    crossing_vehicle
-]
-
+traffic_objects = [crossing_vehicle]
 
 cost_function = TrafficCostFunction()
-
-planner = AStarPlanner(
-    environment,
-    cost_function
-)
-
+planner = AStarPlanner(environment, cost_function)
 
 risk_engine = RiskEngine(
     warning_distance=3.0,
     danger_distance=1.5
 )
 
-
-replanner = Replanner(
-    planner,
-    risk_engine
-)
-
+replanner = Replanner(planner, risk_engine)
 
 simulator = Simulator(
     vehicle,
@@ -66,9 +46,7 @@ simulator = Simulator(
     traffic_objects
 )
 
-
 for i in range(10):
-
     result = simulator.run_step()
 
     print("Step:", result["step"])

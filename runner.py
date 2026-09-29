@@ -18,14 +18,12 @@ def create_simulator(scenario_id):
 
     environment = Environment()
 
-    # Add fixed obstacles
     for obstacle in scenario["obstacles"]:
         environment.add_obstacle(
             obstacle[0],
             obstacle[1]
         )
 
-    # Create our autonomous vehicle
     vehicle = Vehicle(
         x=2,
         y=13,
@@ -35,7 +33,6 @@ def create_simulator(scenario_id):
         destination_y=2
     )
 
-    # Create traffic objects
     traffic_objects = []
 
     for traffic_data in scenario["traffic"]:
@@ -50,7 +47,6 @@ def create_simulator(scenario_id):
 
         traffic_objects.append(traffic)
 
-    # Create planning system
     cost_function = TrafficCostFunction()
 
     planner = AStarPlanner(
@@ -65,7 +61,6 @@ def create_simulator(scenario_id):
         risk_engine
     )
 
-    # Create simulator
     simulator = Simulator(
         vehicle,
         environment,
